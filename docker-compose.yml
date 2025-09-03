@@ -1,0 +1,30 @@
+version: '3.8' # กำหนด docker version
+
+services:
+ api_third_party_impact_loading:
+    image: api_third_party_impact_loading.1.0.0
+    restart: unless-stopped 
+    environment:
+      - STATUS_RUN=UAT_DEVELOPMENT
+      - PORT=32001
+      - APP_NAME=api_third_party_impact_loading
+      - HOST_DB=172.25.10.72
+      - PORT_DB=55432
+      - DATABASE_DB=cit_estamp_parking_db
+      - USER_DB=postgres
+      - PASSWORD_DB=RealCit@db
+      - MAX=20
+      - IDLETIMEOUTMILLIS=0
+      - CONNECTIONTIMEOUTMILLIS=2000
+      - TZ=Asia/Bangkok
+      - USERNAME_BASIC_AUTH=cit
+      - PASSWORD_BASIC_AUTH=Cit@Password
+
+
+
+    build: . # ตำแหน่ง dockerfile
+    ports:
+      - "32001:32001" # map port ออกมา เหมือน -p ใน docker run 
+    volumes:
+      - ../logs:/usr/src/logs
+
