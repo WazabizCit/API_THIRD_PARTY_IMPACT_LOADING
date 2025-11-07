@@ -4,21 +4,22 @@ services:
  api_third_party_impact_loading:
     image: api_third_party_impact_loading.1.0.0
     restart: unless-stopped 
+    user: "1000:1000"
     environment:
       - STATUS_RUN=UAT_DEVELOPMENT
       - PORT=32001
       - APP_NAME=api_third_party_impact_loading
-      - HOST_DB=172.25.10.72
-      - PORT_DB=55432
-      - DATABASE_DB=cit_estamp_parking_db
-      - USER_DB=postgres
-      - PASSWORD_DB=RealCit@db
-      - MAX=20
-      - IDLETIMEOUTMILLIS=0
-      - CONNECTIONTIMEOUTMILLIS=2000
+      - HOST_DB=
+      - PORT_DB=
+      - DATABASE_DB=
+      - USER_DB=
+      - PASSWORD_DB=
+      - MAX=
+      - IDLETIMEOUTMILLIS=
+      - CONNECTIONTIMEOUTMILLIS=
       - TZ=Asia/Bangkok
-      - USERNAME_BASIC_AUTH=cit
-      - PASSWORD_BASIC_AUTH=Cit@Password
+      - USERNAME_BASIC_AUTH=api_cit
+      - PASSWORD_BASIC_AUTH=123456
 
 
 

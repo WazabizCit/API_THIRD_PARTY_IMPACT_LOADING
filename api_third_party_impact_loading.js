@@ -32,11 +32,12 @@ app.listen(config.main_config.PORT, () => {
 
 })
 
-
-const api_third_party_parking_main_route = require('./routes/action_third_party_parking_main_route.js');
+const action_parking_route = require('./routes/action_parking_route.js');
 const action_utils_route = require('./routes/action_utils_route.js');
+const api_third_party_parking_main_route = require('./routes/action_third_party_parking_main_route.js');
 
 
+app.use('/api/v100/parking/entrance', action_parking_route);
 app.use('/api/v100/parking', api_third_party_parking_main_route);
 app.use('/api/v100/parking/utils', action_utils_route);
 

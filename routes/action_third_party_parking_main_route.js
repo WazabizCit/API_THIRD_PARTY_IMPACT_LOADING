@@ -12,7 +12,7 @@ action_third_party_parking_get_cartype
 
 const auth_middle = require("../middleware/auth_middle");
 
-const parking_cit_middle = require("../middleware/parking_cit_middle");
+const parking_middle = require("../middleware/parking_middle");
 
 
 
@@ -20,10 +20,10 @@ const parking_cit_middle = require("../middleware/parking_cit_middle");
 
 
 
-
+//TODO ดึงข้อมูล API jojo getcartype
 router.post('/get/cartype',
     auth_middle.mid_basicauth,
-    parking_cit_middle.mid_send_get_cartype,
+    parking_middle.mid_send_get_cartype,
     action_third_party_parking_get_cartype
 );
 
