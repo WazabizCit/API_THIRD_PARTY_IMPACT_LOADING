@@ -43,8 +43,7 @@ exports.mid_send_check_license_plate = (req, res, next) => {
     let base_url_thirdparty_check_lpr = req.body.obj_setting_thirdparty.base_url_thirdparty_check_lpr
 
 
-
-
+    
 
 
     let data = JSON.stringify({
@@ -71,9 +70,9 @@ exports.mid_send_check_license_plate = (req, res, next) => {
     axios.request(config)
         .then((response) => {
             switch (response.data.data.booking_status_code) {
-                case "BKS000":
+                case "BKS001":
 
-                    req.body["obj_thirdparty_check_lpr"] = response.data
+                    req.body["obj_thirdparty_check"] = response.data
                     next()
 
                     break;
@@ -147,5 +146,125 @@ exports.mid_send_check_license_plate = (req, res, next) => {
 
 }
 
+
+
+
+
+
+
+
+exports.mid_send_check_qrcode_booking = (req, res, next) => {
+
+
+
+
+    let auth_username = req.body.obj_setting_thirdparty.username_thirdparty_basic_auth
+    let auth_password = req.body.obj_setting_thirdparty.password_thirdparty_basic_auth
+    let base_url_thirdparty_check_qrcode = req.body.obj_setting_thirdparty.base_url_thirdparty_check_qrcode
+
+
+
+
+
+
+    let data = JSON.stringify({
+        "booking_code": req.body.qrcode_code,
+        "entry_timestamp": util_moment_date.timestamp_now_default()
+    });
+
+
+    const base64Auth = Buffer.from(`${auth_username}:${auth_password}`).toString('base64');
+
+
+    let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: base_url_thirdparty_check_qrcode,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Basic ${base64Auth}`
+        },
+        data: data,
+        timeout: 5000
+    };
+
+    axios.request(config)
+        .then((response) => {
+            switch (response.data.data.booking_status_code) {
+                case "BKS001":
+
+                    req.body["obj_thirdparty_check"] = response.data
+                    next()
+
+                    break;
+
+                default:
+
+
+                    let booking_status_text = response.data.data.booking_status_text
+                    let data_res_warning = format.create('200', "true", booking_status_text, response.data)
+                    data_res_warning["server_ts"] = util_moment_date.timestamp_now()
+                    util_fun_log.show_log_res_warning(req, data_res_warning)
+                    res.status(200).send(data_res_warning)
+
+
+
+                    break;
+            }
+        })
+        .catch((error) => {
+
+
+            if (error.response) {
+
+
+                let data_res_error_fail = {
+                    "status_code": error.response.status,
+                    "data_res": error.response.data
+
+                }
+
+
+                let data_res_warning = format.create('200', "true", "ทำรายการไม่สำเร็จ mid_send_check_license_plate", data_res_error_fail)
+                data_res_warning["server_ts"] = util_moment_date.timestamp_now()
+                util_fun_log.show_log_res_warning(req, data_res_warning)
+                res.status(200).send(data_res_warning)
+
+
+            } else if (error.request) {
+                // The request was made but no response was received
+                // TimeOUT
+
+
+
+
+                let data_res_error_network_fail = {
+
+                    "status_code": "Request-Timeout",
+                    "data_res": { "detail": "Request-Timeout" }
+
+                }
+
+
+                let data_res_warning = format.create('200', "true", "ทำรายการไม่สำเร็จ mid_send_check_license_plate Request-Timeout", data_res_error_network_fail)
+                data_res_warning["server_ts"] = util_moment_date.timestamp_now()
+                util_fun_log.show_log_res_warning(req, data_res_warning)
+                res.status(200).send(data_res_warning)
+
+
+            } else {
+                // Something happened in setting up the request that triggered an Error
+
+                let data_res_error = format.create('200', "true", "axios mid_send_check_license_plate fail", error)
+                data_res_error["server_ts"] = util_moment_date.timestamp_now()
+                util_fun_log.show_log_res_error(req, data_res_error)
+                res.status(200).send(data_res_error)
+            }
+
+
+        });
+
+
+}
 
 

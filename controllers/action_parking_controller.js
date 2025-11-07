@@ -18,7 +18,9 @@ const config = require("../config/env");
 
 exports.action_parking_entrance_lpr = (req, res) => {
 
-    let res_data_entrance_lpr = format.create('200', "false", "ทำรายการเข้าสำเร็จ-LPR", null)
+    let result = req.body.obj_parking_entrance
+
+    let res_data_entrance_lpr = format.create('200', "false", "ทำรายการเข้าสำเร็จ-LPR", result)
     res_data_entrance_lpr["server_ts"] = util_moment_date.timestamp_now()
     res.status(200).send(res_data_entrance_lpr)
     util_fun_log.show_log_res_info(req, res_data_entrance_lpr)
@@ -36,8 +38,9 @@ exports.action_parking_entrance_qrcode_booking = (req, res) => {
 
 
 
+    let result = req.body.obj_parking_entrance
 
-    let res_data_entrance_qrcode = format.create('200', "false", "ทำรายการเข้าสำเร็จ-QRCODE-BOOKING", null)
+    let res_data_entrance_qrcode = format.create('200', "false", "ทำรายการเข้าสำเร็จ-QRCODE-BOOKING", result)
     res_data_entrance_qrcode["server_ts"] = util_moment_date.timestamp_now()
     res.status(200).send(res_data_entrance_qrcode)
     util_fun_log.show_log_res_info(req, res_data_entrance_qrcode)
