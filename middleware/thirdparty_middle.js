@@ -72,6 +72,8 @@ exports.mid_send_check_license_plate = (req, res, next) => {
     axios.request(config)
         .then((response) => {
             switch (response.data.data.booking_status_code) {
+                //TODO เอา BKS001 ออก
+                case "BKS000":
                 case "BKS001":
 
                     req.body["obj_thirdparty_check"] = response.data
@@ -192,7 +194,10 @@ exports.mid_send_check_qrcode_booking = (req, res, next) => {
 
     axios.request(config)
         .then((response) => {
+
+            //TODO เอา BKS001 ออก
             switch (response.data.data.booking_status_code) {
+                case "BKS000":
                 case "BKS001":
 
                     req.body["obj_thirdparty_check"] = response.data

@@ -22,7 +22,7 @@ const parking_middle = require("../middleware/parking_middle");
 
 //TODO ดึงข้อมูล API jojo getcartype
 router.post('/get/cartype',
-    auth_middle.mid_basicauth,
+    auth_middle.mid_basicauth_thirdparty,
     parking_middle.mid_send_get_cartype,
     action_third_party_parking_get_cartype
 );

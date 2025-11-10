@@ -9,17 +9,22 @@ services:
       - STATUS_RUN=UAT_DEVELOPMENT
       - PORT=32001
       - APP_NAME=api_third_party_impact_loading
-      - HOST_DB=
-      - PORT_DB=
-      - DATABASE_DB=
-      - USER_DB=
-      - PASSWORD_DB=
-      - MAX=
-      - IDLETIMEOUTMILLIS=
-      - CONNECTIONTIMEOUTMILLIS=
+
+      - HOST_DB=172.25.10.242
+      - PORT_DB=3306
+      - DATABASE_DB=carpark2_main
+      - USER_DB=cit
+      - PASSWORD_DB=Psk9Cmt854
+
+      - MAX=10
+      - IDLETIMEOUTMILLIS=10000
+      - CONNECTIONTIMEOUTMILLIS=10000
       - TZ=Asia/Bangkok
-      - USERNAME_BASIC_AUTH=api_cit
-      - PASSWORD_BASIC_AUTH=123456
+
+      - USERNAME_BASIC_AUTH_THIRDPARTY=api_cit
+      - PASSWORD_BASIC_AUTH_THIRDPARTY=123456
+      - USERNAME_BASIC_AUTH_PARKING=admin
+      - PASSWORD_BASIC_AUTH_PARKING=CitPass@word
 
 
 

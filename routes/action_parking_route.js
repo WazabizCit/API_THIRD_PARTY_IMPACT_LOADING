@@ -15,7 +15,7 @@ const thirdparty_middle = require("../middleware/thirdparty_middle");
 
 
 router.post('/lpr',
-    auth_middle.mid_basicauth,
+    auth_middle.mid_basicauth_parking,
     parking_middle.mid_validator_action_parking_main_lpr,
     machine_middle.mid_get_info_machine,
     thirdparty_middle.mid_get_setting_thirdparty,
@@ -32,7 +32,7 @@ router.post('/lpr',
 
 
 router.post('/qrcode-booking',
-    auth_middle.mid_basicauth,
+    auth_middle.mid_basicauth_parking,
     parking_middle.mid_validator_action_parking_main_qrcode_booking,
     machine_middle.mid_get_info_machine,
     thirdparty_middle.mid_get_setting_thirdparty,
