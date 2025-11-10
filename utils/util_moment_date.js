@@ -20,3 +20,6 @@ exports.timestamp_format_unix_timestamp   = (timestamp) => {
 
 
 
+exports.timestamp_format_YYYY_MM_DD_HH_mm_ss_timestamp   = (timestamp) => {
+  return  moment.tz(timestamp, 'Etc/GMT-7').format('YYYY-MM-DD HH:mm:ss');
+}

@@ -22,6 +22,8 @@ router.post('/lpr',
     thirdparty_middle.mid_send_check_license_plate,
     parking_middle.mid_get_setting_parking,
     parking_middle.mid_send_entrance,
+    thirdparty_middle.mid_send_check_in,
+    parking_middle.mid_proc_parking_set_sync_checkin,
     action_parking_entrance_lpr
 );
 
@@ -37,6 +39,8 @@ router.post('/qrcode-booking',
     thirdparty_middle.mid_send_check_qrcode_booking,
     parking_middle.mid_get_setting_parking,
     parking_middle.mid_send_entrance,
+    thirdparty_middle.mid_send_check_in,
+    parking_middle.mid_proc_parking_set_sync_checkin,
     action_parking_entrance_qrcode_booking
 );
 

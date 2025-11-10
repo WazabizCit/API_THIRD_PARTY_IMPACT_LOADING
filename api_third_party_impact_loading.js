@@ -2,12 +2,12 @@ const express = require('express')
 const app = express();
 const bodyParser = require('body-parser');
 const config = require("./config/env.js");
-const pool = require("./config/db_con.js");
+const pool_mysql = require("./config/db_con.js");
 const { v4: uuidv4 } = require('uuid');
 const util_fun_log = require("./utils/util_fun_log.js");
 const util_fun = require("./utils/util_fun.js");
 var cors = require('cors')
-
+const format = require('response-format');
 
 
 app.use(cors())
@@ -48,19 +48,23 @@ app.use('/api/v100/parking/utils', action_utils_route);
 
 
 
-// pool.connect().then(client => {
+pool_mysql.getConnection(function (err, connection) {
+  if (err) throw err; // not connected!
 
-//   return client.query('SELECT NOW()')
-//     .then(result => {
+  // Use the connection
+  connection.query('SELECT NOW() as timestamp', function (error, results, fields) {
+    // When done with the connection, release it.
 
-//       client.release(true)
-//       console.log("connect database success " + JSON.stringify(result.rows[0]))
 
-//     })
-//     .catch(err => {
+    let time_stamp = results[0].timestamp
+    let res_data = format.create('200', "false", `connection success mysql : ${time_stamp}`, null)
+    util_fun_log.show_log_connection_db("", res_data)
+    console.log("connection success mysql")
+    connection.release();
 
-//       client.release(true)
-//       return console.error('Error executing query', err.stack)
-      
-//     })
-// })
+    // Handle error after the release.
+    if (error) throw error;
+
+    // Don't use the connection here, it has been returned to the pool.
+  });
+});

@@ -6,9 +6,7 @@ const format = require('response-format');
 const Joi = require('joi');
 const axios = require('axios');
 const util_moment_date = require("../utils/util_moment_date.js");
-
-
-
+const { db_mid_proc_parking_set_sync_checkin } = require("../models/db_action_parking_model.js");
 
 
 
@@ -89,7 +87,7 @@ exports.mid_send_entrance = (req, res, next) => {
     let guardhouse = "test"
     let address = ""
     let path_div = req.body.img_path_div
-    let path_lic =  req.body.img_path_lic
+    let path_lic = req.body.img_path_lic
     let qrcode_sec = req.body.obj_thirdparty_check.data.booking_code
     let license_plate = req.body.license_plate
     let cartype_id = (req.body.obj_thirdparty_check.data.booking_cartype_id).toString();
@@ -107,7 +105,7 @@ exports.mid_send_entrance = (req, res, next) => {
         "address": address,
         "path_div": path_div,
         "path_lic": path_lic,
-        "qrcode_sec":qrcode_sec
+        "qrcode_sec": qrcode_sec
     });
 
     const base64Auth = Buffer.from(`${auth_username}:${auth_password}`).toString('base64');
@@ -129,14 +127,13 @@ exports.mid_send_entrance = (req, res, next) => {
         .then((response) => {
 
 
-        
+
             switch (response.data.bool_status) {
                 case true:
 
 
-                    let obj_parking_entrance = response.data              
-                    obj_parking_entrance["obj_thirdparty_check"] = req.body.obj_thirdparty_check
-                    req.body["obj_parking_entrance"] = obj_parking_entrance                
+
+                    req.body["obj_parking_entrance"] = response.data
                     next()
 
                     break;
@@ -145,7 +142,7 @@ exports.mid_send_entrance = (req, res, next) => {
 
 
                     let str_message = response.data.str_message
-                    let data_res_warning = format.create('200', "true",str_message, response.data)
+                    let data_res_warning = format.create('200', "true", str_message, response.data)
                     data_res_warning["server_ts"] = util_moment_date.timestamp_now()
                     util_fun_log.show_log_res_warning(req, data_res_warning)
                     res.status(200).send(data_res_warning)
@@ -212,6 +209,38 @@ exports.mid_send_entrance = (req, res, next) => {
 
 
 
+
+
+
+
+exports.mid_proc_parking_set_sync_checkin = (req, res, next) => {
+
+
+
+
+    db_mid_proc_parking_set_sync_checkin(req.body, (err, data) => {
+
+        if (data === null) {
+
+            let data_error = format.create('200', true, "db_mid_proc_parking_set_sync_checkin_fail", null)
+            util_fun_log.show_log_res_fatal(req, data_error)
+            res.send(data_error)
+
+        } else {
+
+
+            req.body["obj_proc_parking_set_sync_checkin"] = data[0]
+            next()
+
+     
+
+
+        }
+
+    });
+
+
+}
 
 
 

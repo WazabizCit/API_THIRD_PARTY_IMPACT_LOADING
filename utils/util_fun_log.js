@@ -7,7 +7,7 @@ let config = require("../config/env");
 log4js.configure({
     appenders: {
         appender: {
-            backups:500,
+            backups: 500,
             type: 'file',
             filename: `../logs/${config.main_config.APP_NAME}/log`,
             keepFileExt: true,
@@ -34,17 +34,17 @@ exports.show_log_res_info = (req, obj) => {
 
     const node_id = process.env.NODE_ID || '0';
     let originalUrl = req.originalUrl
-    let remoteAddress =  req.socket.remoteAddress
+    let remoteAddress = req.socket.remoteAddress
     let remotePort = req.socket.remotePort
-    let app_name  = config.main_config.APP_NAME
-    let sub_app_name  = req.baseUrl
-    let request_id  = req.REQUEST_ID 
-    let status  =  "RES"
+    let app_name = config.main_config.APP_NAME
+    let sub_app_name = req.baseUrl
+    let request_id = req.REQUEST_ID
+    let status = "RES"
 
 
 
     try {
-        
+
         let timestamp = moment().tz('Etc/GMT-7').format('YYYY-MM-DD HH:mm:ss.SSS')
         logger.info(`
         TIMESTAMP => ${timestamp},
@@ -59,7 +59,7 @@ exports.show_log_res_info = (req, obj) => {
         DATA : ${JSON.stringify(obj)}`);
 
         return console.log(
-        `
+            `
         TIMESTAMP => ${timestamp},
         APP_NAME => ${app_name},
         SUB_APP_NAME => ${sub_app_name},
@@ -86,7 +86,7 @@ exports.show_log_res_info = (req, obj) => {
         `);
 
         return console.log(
-        `
+            `
         TIMESTAMP => ${timestamp},
         APP_NAME => ${app_name},
         SUB_APP_NAME => ${sub_app_name},
@@ -105,13 +105,13 @@ exports.show_log_res_warning = (req, obj) => {
 
 
     let originalUrl = req.originalUrl
-    let remoteAddress =  req.socket.remoteAddress
+    let remoteAddress = req.socket.remoteAddress
     let remotePort = req.socket.remotePort
-    let app_name  = config.main_config.APP_NAME
-    let sub_app_name  = req.baseUrl
+    let app_name = config.main_config.APP_NAME
+    let sub_app_name = req.baseUrl
     const node_id = process.env.NODE_ID || '0';
-    let status  =  "RES"
-    let request_id  = req.REQUEST_ID 
+    let status = "RES"
+    let request_id = req.REQUEST_ID
 
     try {
 
@@ -129,7 +129,7 @@ exports.show_log_res_warning = (req, obj) => {
         DATA : ${JSON.stringify(obj)}`);
 
         return console.log(
-        `
+            `
         TIMESTAMP => ${timestamp},
         APP_NAME => ${app_name},
         SUB_APP_NAME => ${sub_app_name},
@@ -159,7 +159,7 @@ exports.show_log_res_warning = (req, obj) => {
         `);
 
         return console.log(
-        `
+            `
         TIMESTAMP => ${timestamp},
         APP_NAME => ${app_name},
         SUB_APP_NAME => ${sub_app_name},
@@ -181,13 +181,13 @@ exports.show_log_res_error = (req, obj) => {
 
 
     let originalUrl = req.originalUrl
-    let remoteAddress =  req.socket.remoteAddress
+    let remoteAddress = req.socket.remoteAddress
     let remotePort = req.socket.remotePort
-    let app_name  = config.main_config.APP_NAME
-    let sub_app_name  = req.baseUrl
+    let app_name = config.main_config.APP_NAME
+    let sub_app_name = req.baseUrl
     const node_id = process.env.NODE_ID || '0';
-    let status  =  "RES"
-    let request_id  = req.REQUEST_ID 
+    let status = "RES"
+    let request_id = req.REQUEST_ID
 
     try {
 
@@ -205,7 +205,7 @@ exports.show_log_res_error = (req, obj) => {
         DATA : ${JSON.stringify(obj)}`);
 
         return console.log(
-        `
+            `
         TIMESTAMP => ${timestamp},
         APP_NAME => ${app_name},
         SUB_APP_NAME => ${sub_app_name},
@@ -234,7 +234,7 @@ exports.show_log_res_error = (req, obj) => {
         `);
 
         return console.log(
-        `
+            `
         TIMESTAMP => ${timestamp},
         APP_NAME => ${app_name},
         SUB_APP_NAME => ${sub_app_name},
@@ -255,22 +255,22 @@ exports.show_log_res_error = (req, obj) => {
 
 exports.show_log_res_fatal = (req, obj) => {
 
-    
+
 
 
     let originalUrl = req.originalUrl
-    let remoteAddress =  req.socket.remoteAddress
+    let remoteAddress = req.socket.remoteAddress
     let remotePort = req.socket.remotePort
-    let app_name  = config.main_config.APP_NAME
-    let sub_app_name  = req.baseUrl
+    let app_name = config.main_config.APP_NAME
+    let sub_app_name = req.baseUrl
     const node_id = process.env.NODE_ID || '0';
-    let request_id  = req.REQUEST_ID 
-    let status  =  "RES"
-    
+    let request_id = req.REQUEST_ID
+    let status = "RES"
+
 
     try {
 
-   
+
         let timestamp = moment().tz('Etc/GMT-7').format('YYYY-MM-DD HH:mm:ss.SSS')
         logger.fatal(`
         TIMESTAMP => ${timestamp},
@@ -285,7 +285,7 @@ exports.show_log_res_fatal = (req, obj) => {
         DATA : ${JSON.stringify(obj)}`);
 
         return console.log(
-        `
+            `
         TIMESTAMP => ${timestamp},
         APP_NAME => ${app_name},
         SUB_APP_NAME => ${sub_app_name},
@@ -304,7 +304,7 @@ exports.show_log_res_fatal = (req, obj) => {
 
     } catch (error) {
 
-     
+
         let timestamp = moment().tz('Etc/GMT-7').format('YYYY-MM-DD HH:mm:ss.SSS')
         logger.error(`
         TIMESTAMP => ${timestamp},
@@ -319,7 +319,7 @@ exports.show_log_res_fatal = (req, obj) => {
         `);
 
         return console.log(
-        `
+            `
         TIMESTAMP => ${timestamp},
         APP_NAME => ${app_name},
         SUB_APP_NAME => ${sub_app_name},
@@ -340,17 +340,17 @@ exports.show_log_res_fatal = (req, obj) => {
 
 exports.show_log_req = (req) => {
 
-    let req_body = req.body 
+    let req_body = req.body
     let originalUrl = req.originalUrl
-    let remoteAddress =  req.socket.remoteAddress
+    let remoteAddress = req.socket.remoteAddress
     let remotePort = req.socket.remotePort
-    let app_name  = config.main_config.APP_NAME
-    let sub_app_name  = req.baseUrl
+    let app_name = config.main_config.APP_NAME
+    let sub_app_name = req.baseUrl
     const node_id = process.env.NODE_ID || '0';
-    let status  =  "REQ"
-    let request_id  = req.REQUEST_ID 
+    let status = "REQ"
+    let request_id = req.REQUEST_ID
 
-    try {    
+    try {
 
 
         let timestamp = moment().tz('Etc/GMT-7').format('YYYY-MM-DD HH:mm:ss.SSS')
@@ -367,7 +367,7 @@ exports.show_log_req = (req) => {
         DATA : ${JSON.stringify(req_body)}`);
 
         return console.log(
-        `
+            `
         TIMESTAMP => ${timestamp},
         APP_NAME => ${app_name},
         SUB_APP_NAME => ${sub_app_name},
@@ -397,7 +397,7 @@ exports.show_log_req = (req) => {
         `);
 
         return console.log(
-        `
+            `
         TIMESTAMP => ${timestamp},
         APP_NAME => ${app_name},
         SUB_APP_NAME => ${sub_app_name},
@@ -408,7 +408,80 @@ exports.show_log_req = (req) => {
         REMOTE_PORT => ${remotePort},
         ORIGINALURL => ${originalUrl} 
        `)
-        
+
     }
 }
 
+
+
+
+exports.show_log_connection_db = (db, obj) => {
+
+
+    const node_id = process.env.NODE_ID || '0';
+    let originalUrl = db
+    let remoteAddress = ""
+    let remotePort = ""
+    let app_name = config.main_config.APP_NAME
+    let sub_app_name = ""
+    let request_id = ""
+    let status = "RES"
+
+
+
+    try {
+
+        let timestamp = moment().tz('Etc/GMT-7').format('YYYY-MM-DD HH:mm:ss.SSS')
+        logger.info(`
+        TIMESTAMP => ${timestamp},
+        APP_NAME => ${app_name},
+        SUB_APP_NAME => ${sub_app_name},
+        NODE_ID => ${node_id},
+        REQUEST_ID => ${request_id},
+        STATUS => ${status},
+        REMOTE_ADDRESS => ${remoteAddress},
+        REMOTE_PORT => ${remotePort},
+        ORIGINALURL => ${originalUrl},    
+        DATA : ${JSON.stringify(obj)}`);
+
+        return console.log(
+            `
+        TIMESTAMP => ${timestamp},
+        APP_NAME => ${app_name},
+        SUB_APP_NAME => ${sub_app_name},
+        NODE_ID => ${node_id},
+        STATUS => ${status},
+        REMOTE_ADDRESS => ${remoteAddress},
+        REMOTE_PORT => ${remotePort},
+        ORIGINALURL => ${originalUrl},  
+        DATA : ${JSON.stringify(obj)}`
+        )
+
+    } catch (error) {
+
+        let timestamp = moment().tz('Etc/GMT-7').format('YYYY-MM-DD HH:mm:ss.SSS')
+        logger.error(`
+        TIMESTAMP => ${timestamp},
+        APP_NAME => ${app_name},
+        SUB_APP_NAME => ${sub_app_name},
+        NODE_ID => ${node_id},
+        STATUS => ${status},
+        REMOTE_ADDRESS => ${remoteAddress},
+        REMOTE_PORT => ${remotePort},
+        ORIGINALURL => ${originalUrl}
+        `);
+
+        return console.log(
+            `
+        TIMESTAMP => ${timestamp},
+        APP_NAME => ${app_name},
+        SUB_APP_NAME => ${sub_app_name},
+        NODE_ID => ${node_id},
+        STATUS => ${status},
+        REMOTE_ADDRESS => ${remoteAddress},
+        REMOTE_PORT => ${remotePort},
+        ORIGINALURL => ${originalUrl} 
+       `
+        )
+    }
+}

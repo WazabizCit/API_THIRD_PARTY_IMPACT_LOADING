@@ -18,7 +18,17 @@ const config = require("../config/env");
 
 exports.action_parking_entrance_lpr = (req, res) => {
 
-    let result = req.body.obj_parking_entrance
+    let obj_parking_entrance = req.body.obj_parking_entrance
+    let obj_thirdparty_check = req.body.obj_thirdparty_check
+    let obj_thirdparty_check_in = req.body.obj_thirdparty_check_in
+
+
+    let result = {
+        obj_parking_entrance: obj_parking_entrance,
+        obj_thirdparty_check: obj_thirdparty_check,
+        obj_thirdparty_check_in: obj_thirdparty_check_in
+    }
+
 
     let res_data_entrance_lpr = format.create('200', "false", "ทำรายการเข้าสำเร็จ-LPR", result)
     res_data_entrance_lpr["server_ts"] = util_moment_date.timestamp_now()
@@ -38,7 +48,17 @@ exports.action_parking_entrance_qrcode_booking = (req, res) => {
 
 
 
-    let result = req.body.obj_parking_entrance
+
+    let obj_parking_entrance = req.body.obj_parking_entrance
+    let obj_thirdparty_check = req.body.obj_thirdparty_check
+    let obj_thirdparty_check_in = req.body.obj_thirdparty_check_in
+
+
+    let result = {
+        obj_parking_entrance: obj_parking_entrance,
+        obj_thirdparty_check: obj_thirdparty_check,
+        obj_thirdparty_check_in: obj_thirdparty_check_in
+    }
 
     let res_data_entrance_qrcode = format.create('200', "false", "ทำรายการเข้าสำเร็จ-QRCODE-BOOKING", result)
     res_data_entrance_qrcode["server_ts"] = util_moment_date.timestamp_now()
