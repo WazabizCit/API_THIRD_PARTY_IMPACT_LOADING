@@ -27,8 +27,8 @@ exports.mid_get_setting_thirdparty = (req, res, next) => {
 
 
         let obj_setting_thirdparty = {
-        "base_url_thirdparty_check_lpr": "http://159.223.32.43:4000/api/bookings/check-license-plate",
-        "base_url_thirdparty_check_qrcode": "http://159.223.32.43:4000/api/bookings/qr-code",
+        "base_url_thirdparty_check_lpr": config.main_config.BASE_URL_THIRDPARTY_CHECK_LPR,
+        "base_url_thirdparty_check_qrcode": config.main_config.BASE_URL_THIRDPARTY_CHECK_QRCODE,
         "base_url_thirdparty_check_in":config.main_config.BASE_URL_THIRDPARTY_CHECK_IN,
         "base_url_thirdparty_check_out": config.main_config.BASE_URL_THIRDPARTY_CHECK_OUT,
         "username_thirdparty_basic_auth": config.main_config.USERNAME_THIRDPARTY_BASIC_AUTH,

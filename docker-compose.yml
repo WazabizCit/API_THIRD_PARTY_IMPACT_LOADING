@@ -1,36 +1,44 @@
-version: '3.8' # กำหนด docker version
+version: '3.8'
 
 services:
- api_third_party_impact_loading:
-    image: api_third_party_impact_loading.1.0.0
-    restart: unless-stopped 
+  api_third_party_impact_loading:
+    build: .
+    image: api_third_party_impact_loading:1.0.0
+    restart: unless-stopped
     user: "1000:1000"
+
     environment:
-      - STATUS_RUN=UAT_DEVELOPMENT
-      - PORT=32001
-      - APP_NAME=api_third_party_impact_loading
+      STATUS_RUN: "UAT_DEVELOPMENT"
+      PORT: "32001"
+      APP_NAME: "api_third_party_impact_loading"
 
-      - HOST_DB=172.25.10.242
-      - PORT_DB=3306
-      - DATABASE_DB=carpark2_main
-      - USER_DB=cit
-      - PASSWORD_DB=Psk9Cmt854
+      HOST_DB: "172.25.10.242"
+      PORT_DB: "3306"
+      DATABASE_DB: "carpark2_main"
+      USER_DB: "cit"
+      PASSWORD_DB: "Psk9Cmt854"
+      CONNECTIONLIMIT: "10"
 
-      - MAX=10
-      - IDLETIMEOUTMILLIS=10000
-      - CONNECTIONTIMEOUTMILLIS=10000
-      - TZ=Asia/Bangkok
+      USERNAME_BASIC_AUTH_THIRDPARTY: "api_cit"
+      PASSWORD_BASIC_AUTH_THIRDPARTY: "123456"
+      USERNAME_BASIC_AUTH_PARKING: "admin"
+      PASSWORD_BASIC_AUTH_PARKING: "CitPass@word"
 
-      - USERNAME_BASIC_AUTH_THIRDPARTY=api_cit
-      - PASSWORD_BASIC_AUTH_THIRDPARTY=123456
-      - USERNAME_BASIC_AUTH_PARKING=admin
-      - PASSWORD_BASIC_AUTH_PARKING=CitPass@word
+      BASE_URL_PARKING_ENTRANCE: "http://172.25.10.13:9876/api/SaveActionIn/SaveTicketLoading"
+      USERNAME_PARKING_BASIC_AUTH: "cit"
+      PASSWORD_PARKING_BASIC_AUTH: "cit00"
 
+      BASE_URL_THIRDPARTY_CHECK_LPR: "http://159.223.32.43:4000/api/bookings/check-license-plate"
+      BASE_URL_THIRDPARTY_CHECK_QRCODE: "http://159.223.32.43:4000/api/bookings/qr-code"
+      BASE_URL_THIRDPARTY_CHECK_IN: "http://159.223.32.43:4000/api/bookings/check-in"
+      BASE_URL_THIRDPARTY_CHECK_OUT: "http://159.223.32.43:4000/api/bookings/check-out"
+      USERNAME_THIRDPARTY_BASIC_AUTH: "booking_api"
+      PASSWORD_THIRDPARTY_BASIC_AUTH: "1234567"
 
+      TZ: "Asia/Bangkok"
 
-    build: . # ตำแหน่ง dockerfile
     ports:
-      - "32001:32001" # map port ออกมา เหมือน -p ใน docker run 
+      - "32001:32001"
+
     volumes:
       - ../logs:/usr/src/logs
-
