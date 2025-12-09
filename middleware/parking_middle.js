@@ -14,11 +14,18 @@ exports.mid_get_setting_parking = (req, res, next) => {
 
 
 
+    // let obj_setting_parking = {
+    //     "base_url_parking_entrance": "http://172.25.10.13:9876/api/SaveActionIn/SaveTicketLoading",
+    //     "username_parking_basic_auth": "cit",
+    //     "password_parking_basic_auth": "cit00"
+    // }
+
     let obj_setting_parking = {
-        "base_url_parking_entrance": "http://172.25.10.13:9876/api/SaveActionIn/SaveTicketLoading",
-        "username_parking_basic_auth": "cit",
-        "password_parking_basic_auth": "cit00"
+        "base_url_parking_entrance": config.main_config.BASE_URL_PARKING_ENTRANCE,
+        "username_parking_basic_auth": config.main_config.USERNAME_PARKING_BASIC_AUTH,
+        "password_parking_basic_auth": config.main_config.PASSWORD_PARKING_BASIC_AUTH,
     }
+
 
     req.body["obj_setting_parking"] = obj_setting_parking
     next()
@@ -232,7 +239,7 @@ exports.mid_proc_parking_set_sync_checkin = (req, res, next) => {
             req.body["obj_proc_parking_set_sync_checkin"] = data[0]
             next()
 
-     
+
 
 
         }

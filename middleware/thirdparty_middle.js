@@ -16,13 +16,23 @@ exports.mid_get_setting_thirdparty = (req, res, next) => {
 
 
 
-    let obj_setting_thirdparty = {
+    // let obj_setting_thirdparty = {
+    //     "base_url_thirdparty_check_lpr": "http://159.223.32.43:4000/api/bookings/check-license-plate",
+    //     "base_url_thirdparty_check_qrcode": "http://159.223.32.43:4000/api/bookings/qr-code",
+    //     "base_url_thirdparty_check_in": "http://159.223.32.43:4000/api/bookings/check-in",
+    //     "base_url_thirdparty_check_out": "http://159.223.32.43:4000/api/bookings/check-out",
+    //     "username_thirdparty_basic_auth": "booking_api",
+    //     "password_thirdparty_basic_auth": "1234567"
+    // }
+
+
+        let obj_setting_thirdparty = {
         "base_url_thirdparty_check_lpr": "http://159.223.32.43:4000/api/bookings/check-license-plate",
         "base_url_thirdparty_check_qrcode": "http://159.223.32.43:4000/api/bookings/qr-code",
-        "base_url_thirdparty_check_in": "http://159.223.32.43:4000/api/bookings/check-in",
-        "base_url_thirdparty_check_out": "http://159.223.32.43:4000/api/bookings/check-out",
-        "username_thirdparty_basic_auth": "booking_api",
-        "password_thirdparty_basic_auth": "1234567"
+        "base_url_thirdparty_check_in":config.main_config.BASE_URL_THIRDPARTY_CHECK_IN,
+        "base_url_thirdparty_check_out": config.main_config.BASE_URL_THIRDPARTY_CHECK_OUT,
+        "username_thirdparty_basic_auth": config.main_config.USERNAME_THIRDPARTY_BASIC_AUTH,
+        "password_thirdparty_basic_auth": config.main_config.PASSWORD_THIRDPARTY_BASIC_AUTH,
     }
 
     req.body["obj_setting_thirdparty"] = obj_setting_thirdparty
@@ -74,7 +84,7 @@ exports.mid_send_check_license_plate = (req, res, next) => {
             switch (response.data.data.booking_status_code) {
                 //TODO เอา BKS001 ออก
                 case "BKS000":
-                case "BKS001":
+                //case "BKS001":
 
                     req.body["obj_thirdparty_check"] = response.data
                     next()
@@ -198,7 +208,7 @@ exports.mid_send_check_qrcode_booking = (req, res, next) => {
             //TODO เอา BKS001 ออก
             switch (response.data.data.booking_status_code) {
                 case "BKS000":
-                case "BKS001":
+                //case "BKS001":
 
                     req.body["obj_thirdparty_check"] = response.data
                     next()
